@@ -5,6 +5,9 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find(params[:id])
+    if current_user
+      @review = @product.reviews.build
+    end
   end
 
   def new
@@ -34,7 +37,7 @@ end
     end
   end
 
-  def destroy
+  def destroy 
     @product = Product.find(params[:id])
     @product.destroy
     redirect_to products_path
